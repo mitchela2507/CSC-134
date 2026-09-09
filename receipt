@@ -1,0 +1,33 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+using namespace std;
+
+int main()
+{
+    // Declare variables
+    string mealName;
+    double mealPrice, tipPercent;
+    double taxRate = 0.08;
+    double taxAmount, tipRate, tipAmount, total;
+
+    // Input
+    getline(cin, mealName);
+    cin >> mealPrice;
+    cin >> tipPercent;
+
+    // Processing
+    taxAmount = mealPrice * taxRate;
+    tipRate = tipPercent / 100.0;
+    tipAmount = mealPrice * tipRate;
+    total = mealPrice + taxAmount + tipAmount;
+
+    // Output
+    cout << fixed << setprecision(2);
+    cout << "Meal: $" << mealPrice << endl;
+    cout << "Tax:  $" << taxAmount << endl;
+    cout << "Tip:  $" << tipAmount << endl;
+    cout << "Total:$" << total << endl;
+
+    return 0; // no errors
+}
