@@ -1,5 +1,5 @@
 // CSC 134
-// M2T1 - Receipt
+// M2T2 - Receipt
 // Mitchell, A 
 // 9/14/26
 // Build a receipt that looks like a receipt.
