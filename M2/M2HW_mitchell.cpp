@@ -102,6 +102,8 @@ void question2() {
     cout << "Sells for:     $" << crate_charge << endl;
     cout << "Profit:        $" << profit << endl;
 
+    return;
+
 }
 
 void question3() {
