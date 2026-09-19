@@ -23,10 +23,10 @@ using namespace std;
 
 int main() {
     // Run only the questions you finish
-    question1();
+    //question1();
     //question2();
     //question3();
-    //question4();
+    question4();
 }
 
 void question1() 
@@ -36,7 +36,7 @@ void question1()
     double starting_balance;
     double deposit_amount;
     double withdrawal_amount;
-    double balance_amount;
+    double final_balance;
 
     // Input:
     cout << "What is the name on the account: ";
@@ -47,17 +47,18 @@ void question1()
     cin >> deposit_amount;
     cout << "How much are you withdrawing from the account: " ;
     cin >> withdrawal_amount;
-    cout << endl;
 
     // Calculations:
     deposit_amount = starting_balance + deposit_amount;
-    balance_amount = deposit_amount - withdrawal_amount; 
+    final_balance = deposit_amount - withdrawal_amount; 
 
     // Display results:
-     cout << setprecision(2) << fixed; 
+     cout << setprecision(2) << fixed;
+     cout << endl;
      cout << "Name on the Account: " << name << endl;
      cout << "Account Number: 1234567890" << endl;
-     cout << "Final Account Balance: " << balance_amount << endl;
+     cout << "Final Account Balance: " << final_balance << endl;
+     cout << endl;
 
 }
 
@@ -101,16 +102,64 @@ void question2() {
     cout << "Cost to build: $" << crate_cost << endl;
     cout << "Sells for:     $" << crate_charge << endl;
     cout << "Profit:        $" << profit << endl;
+    cout << endl;
 
     return;
 
 }
 
 void question3() {
-    cout << "Question 3 goes here" << endl;
+
+    // Variables:
+    int pizza;
+    int slices_per_pizza;
+    int visitors;
+    int total_slices;
+    int slices_needed;
+    int leftover_slices;
+
+    // Input:
+    cout << "How many pizzas do you want order?: ";
+    cin >> pizza;
+    cout << "How many slices per pizza?: ";
+    cin >> slices_per_pizza;
+    cout << "How many visitors are coming?: ";
+    cin >> visitors;
+
+    // Calculation:
+    total_slices = pizza * slices_per_pizza;
+    slices_needed = visitors * 3;
+    leftover_slices = total_slices - slices_needed;
+
+    // Display Results:
+    cout << endl;
+    cout << "Total Slices: " << total_slices << endl;
+    cout << "Slices Needed: " << slices_needed << endl;
+    cout << "Leftover Pizza Pieces: " << leftover_slices << endl;
+    cout << endl;
+
+
 }
 
 void question4() {
-    cout << "Question 4 goes here" << endl;
+
+    // Variables:
+    string school, team, letsGo;
+    string cheerOne, cheerTwo;
+
+    letsGo = "Let's go ";
+    school = "FTCC";
+    team = "Trojans";
+
+    // String Concatenation:
+    cheerOne = letsGo + school;
+    cheerTwo = letsGo + team;
+
+    // Display Output:
+    cout << cheerOne << endl;
+    cout << cheerOne << endl;
+    cout << cheerOne << endl;
+    cout << cheerTwo << endl;
+    cout << endl;
 }
 
