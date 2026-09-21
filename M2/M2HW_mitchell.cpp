@@ -5,7 +5,7 @@ Mitchell, A
 9/16/2026
 HOW TO USE:
 - Fill in the fuctions for any question you answer
-- uncomment those functions in msin, so they run.
+- uncomment those functions in main, so they run.
 */
 
 #include <iostream>
@@ -13,7 +13,7 @@ HOW TO USE:
 using namespace std;
 
     // COVERED in module 5, here's the basics
-    // List ectra functions above main
+    // List extra functions above main
     // Write the full version below main
 
     void question1();
@@ -23,14 +23,15 @@ using namespace std;
 
 int main() {
     // Run only the questions you finish
-    //question1();
-    //question2();
-    //question3();
-    //question4();
+    question1();
+    question2();
+    question3();
+    question4();
 }
 
 void question1() 
 {
+    cout << "Question 1:" << endl;
     // Variables:
     string name;
     double starting_balance;
@@ -40,13 +41,13 @@ void question1()
 
     // Input:
     cout << "What is the name on the account: ";
-    cin >> name;
+    cin  >> name;
     cout << "What is your account balance: ";
-    cin >> starting_balance;
+    cin  >> starting_balance;
     cout << "How much are you depositung into the account: ";
-    cin >> deposit_amount;
+    cin  >> deposit_amount;
     cout << "How much are you withdrawing from the account: " ;
-    cin >> withdrawal_amount;
+    cin  >> withdrawal_amount;
 
     // Calculations:
     deposit_amount = starting_balance + deposit_amount;
@@ -63,7 +64,7 @@ void question1()
 }
 
 void question2() {
-
+    cout << "Question 2:" << endl;
     const double COST_PER_CUBIC_FOOT = 0.3;    
     const double CHARGE_PER_CUBIC_FOOT = 0.52;  
 
@@ -77,11 +78,11 @@ void question2() {
     // Get the dimensions of the crate
     cout << "Please enter the crate dimensions." << endl;
     cout << "Crate length: ";
-    cin >> length;
+    cin  >> length;
     cout << "Crate width: ";
-    cin >> width;
+    cin  >> width;
     cout << "Crate height: ";
-    cin >> height;
+    cin  >> height;
 
 
     // Calculate the volume
@@ -109,6 +110,7 @@ void question2() {
 }
 
 void question3() {
+    cout << "Question 3:" << endl;
 
     // Variables:
     int pizza;
@@ -120,11 +122,11 @@ void question3() {
 
     // Input:
     cout << "How many pizzas do you want order?: ";
-    cin >> pizza;
+    cin  >> pizza;
     cout << "How many slices per pizza?: ";
-    cin >> slices_per_pizza;
+    cin  >> slices_per_pizza;
     cout << "How many visitors are coming?: ";
-    cin >> visitors;
+    cin  >> visitors;
 
     // Calculation:
     total_slices = pizza * slices_per_pizza;
@@ -142,6 +144,7 @@ void question3() {
 }
 
 void question4() {
+    cout << "Question 4:" << endl;
 
     // Variables:
     string school, team, letsGo;
