@@ -2,7 +2,7 @@
 // M3T2 - Random Numbers
 // mitchella
 // 9/23/2026
-// Start writing a simple "Craps"  casino game.
+// Start writing a simple "Craps" casino game.
 
 #include <iostream>
 #include <cstdlib> // for random
