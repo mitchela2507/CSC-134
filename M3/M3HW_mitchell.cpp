@@ -1,5 +1,5 @@
 // CSC 134
-// Module 3 HW (M3HW) - Gold
+// M3HW1 - Gold
 // mitchella
 // 9/30/2026
 
@@ -16,9 +16,9 @@ using namespace std;
 
 
 int main() {
-    //question1();
-    //question2();
-    //question3();
+    question1();
+    question2();
+    question3();
     question4();
 }
 
@@ -80,7 +80,7 @@ void question2() {
     cout << line << endl;
 
     cout << setprecision(2) << fixed;
-    cout << setw(20) << "Meal: " << setw(10) << mealPrice << endl;
+    cout << setw(20) << "Meal Price: " << setw(10) << mealPrice << endl;
     cout << setw(20) << "Tax: " << setw(10) << taxAmount << endl;
     if (orderType == 1){
         cout << setw(20) << "Tip: " << setw(10) << tipAmount << endl;
@@ -152,14 +152,11 @@ void question4() {
     number1 = (rand() % 9) + 1;
     number2 = (rand() % 9) + 1;
 
-    
     correctAnswer = number1 + number2;
 
-    
     cout << "What is " << number1 << " plus " << number2 << "?" << endl;
     cin >> answer;
 
-    // Check the answer
     if (answer == correctAnswer) {
         cout << "Correct!" << endl;
     }
