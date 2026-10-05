@@ -6,7 +6,7 @@
 using namespace std;
 
 int main(){
-     // counting loop
+     // counting loop (part 1)
      int count = 1;
      while (count <= 5) {
         cout << "Hello #" << count << endl;
@@ -23,4 +23,5 @@ int main(){
         cout << i << "\t" << i*i << endl;
         i++;
      }
+     
 }
