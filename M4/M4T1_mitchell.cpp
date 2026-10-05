@@ -1,10 +1,26 @@
 // CSC 134
-// M3T1 - Comparing Areas
+// M4T1 - Basic Loops
 // mitchella
-// 9/21/2026
-// Get area of two rectangles, find the largest one.
-
+// 10/05/2026
 #include <iostream>
 using namespace std;
 
 int main(){
+     // counting loop
+     int count = 1;
+     while (count <= 5) {
+        cout << "Hello #" << count << endl;
+        count++; // increment AFTER showing the number
+     }
+     // table of squares (part 2)
+     const int MIN_NUM = 1;
+     const int MAX_NUM = 10;
+
+     cout << endl << "NUM   NUM Squared" << endl;
+     cout << "------------------" << endl;
+     int i = MIN_NUM;
+     while (i <= MAX_NUM) {
+        cout << i << "\t" << i*i << endl;
+        i++;
+     }
+}
