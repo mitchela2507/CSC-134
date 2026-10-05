@@ -14,6 +14,8 @@ int main(){
     while (done == false) {
         cout << "Still going...";
     }
+
+    
      // counting loop
      int count = 1;
      while (count < 6) {
