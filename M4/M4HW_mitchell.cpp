@@ -27,8 +27,7 @@ void question1() {
 
     while (i <= 12) {
         answer = firstNum * i;
-        cout << firstNum << " times " << i
-             << " is " << answer << "." << endl;
+        cout << firstNum << " times " << i << " is " << answer << "." << endl;
 
         i++;
     }
@@ -46,8 +45,7 @@ void question2() {
 
 
     while (multiplier <= 12) {
-        cout << number << " times " << multiplier
-             << " is " << number * multiplier << "." << endl;
+        cout << number << " times " << multiplier << " is " << number * multiplier << "." << endl;
 
         multiplier++;
     }
@@ -70,8 +68,7 @@ void question3() {
     }
 
     while (multiplier <= 12) {
-        cout << number << " times " << multiplier
-             << " is " << number * multiplier << "." << endl;
+        cout << number << " times " << multiplier << " is " << number * multiplier << "." << endl;
 
         multiplier++;
     }
