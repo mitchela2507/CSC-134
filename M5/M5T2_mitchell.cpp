@@ -1,7 +1,7 @@
 // CSC 134
 // M5T2 - More practice with Functions
 // mitchella
-// Partner: AI
+// Partner: AI- Github Copilot/ Myself
 // 10/21/2026
 
 
