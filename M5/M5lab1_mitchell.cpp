@@ -23,6 +23,8 @@ void choice_go_home();
 void choice_kitchen();
 void choice_bedroom();
 void choice_basement();
+void choice_pie_ending();
+void choice_treasure_ending();
 // TODO: add your new prototypes here
 
 int main() {
@@ -58,11 +60,11 @@ void main_menu() {
   cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
   if (1 == choice) {
-    choice_front_door();
+      choice_front_door();
   } else if (2 == choice) {
-    // call choice 2 here
+      choice_back_door();
   } else if (3 == choice) {
-    // call choice 3 here
+      choice_go_home();
   } else if (4 == choice) {
     cout << "Ok, quitting game" << endl;
     return; // go back to main()
@@ -78,13 +80,26 @@ void choice_front_door() {
   cout << "Do you:" << endl;
   cout << "1. Check around back" << endl;
   cout << "2. Give up and go home" << endl;
+
   int choice = 0;
   cout << "Choose: ";
   cin >> choice;
+
+  if (cin.fail()) {
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Invalid choice. Please enter 1 or 2." << endl;
+      choice_front_door();
+      return;
+  }
+
   if (1 == choice) {
     choice_back_door();
   } else if (2 == choice) {
     choice_go_home();
+  } else {
+    cout << "Invalid choice. Please choose 1 or 2." << endl;
+    choice_front_door();
   }
 }
 
@@ -97,9 +112,19 @@ void choice_back_door() {
   cout << "2. Explore the bedroom" << endl;
   cout << "3. Explore the basement" << endl;
   cout << "4. Go home" << endl;
+
   int choice = 0;
   cout << "Choose: ";
   cin >> choice;
+
+  if (cin.fail()) {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Invalid choice. Please enter a number from 1 to 4." << endl;
+    choice_back_door();
+    return;
+  }
+
     if (1 == choice) {
       choice_kitchen();
     } else if (2 == choice) {
@@ -109,79 +134,9 @@ void choice_back_door() {
     }
     else if (4 == choice) {
       choice_go_home();
-    }
-}
-
-void choice_kitchen() {
-  cout << "You explore the kitchen." << endl;
-  cout << "You find a delicious looking pumpkin pie!" << endl;
-  cout << "Do you:" << endl;
-  cout << "1. Eat the pie" << endl;
-  cout << "2. Leave it alone" << endl;
-  int choice = 0;
-  cout << "Choose: ";
-  cin >> choice;
-  if (1 == choice) {
-    cout << "You eat the pie and feel sick. You should have left it alone. Now you're dead!" << endl;
-  } else if (2 == choice) {
-    cout << "You wisely leave the pie alone and continue exploring." << endl;
-  }
-  cout << "Do you want to explore the bedroom or go back outside?" << endl;
-  cout << "1. Explore the bedroom" << endl;
-  cout << "2. Go explore the basement" << endl;
-  cout << "3. Go home" << endl;
-  cout << "Choose: ";
-  cin >> choice;
-  if (1 == choice) {
-    choice_bedroom();
-  }else if (2 == choice) {
-    choice_basement();
-  }else if (3== choice) {
-    choice_go_home();
-  }
-}
-
-void choice_bedroom() {
-  cout << "You explore the bedroom." << endl;
-  cout << "You find a cozy bed and decide to take a nap." << endl;
-  cout << "Do you:" << endl;
-  cout << "1. Take a nap" << endl;
-  cout << "2. Leave the bedroom" << endl;
-  int choice = 0;
-  cout << "Choose: ";
-  cin >> choice;
-  if (1 == choice) {
-    cout << "You take a nap and wake up feeling refreshed!" << endl;
-    cout << "You decide to continue exploring the house." << endl;
-  } else if (2 == choice) {
-    cout << "You leave the bedroom and continue exploring." << endl;
-  }
-  cout << "Do you want to explore the basement or go home?" << endl;
-  cout << "1. Explore the basement" << endl;
-  cout << "2. Go home" << endl;
-  cout << "Choose: ";
-  cin >> choice;
-  if (1 == choice) {
-    choice_basement();
-  } else if (2 == choice) {
-    choice_go_home();
-  }
-}
-
-void choice_basement() {
-  cout << "You explore the basement." << endl;
-  cout << "You find a dusty old chest." << endl;
-  cout << "Do you:" << endl;
-  cout << "1. Open the chest" << endl;
-  cout << "2. Leave it alone" << endl;
-  int choice = 0;
-  cout << "Choose: ";
-  cin >> choice;
-  if (1 == choice) {
-    cout << "You open the chest and find a treasure! But it's cursed!" << endl;
-    cout << "You feel a dark presence and decide to leave the house immediately." << endl;
-  } else if (2 == choice) {
-    cout << "You wisely leave the chest alone and decide to just go home." << endl;
+    } else {
+    cout << "Invalid choice. Please choose between 1 to 4." << endl;
+    choice_back_door();
   }
 }
 
@@ -189,4 +144,161 @@ void choice_go_home() {
   cout << "You decide to go home." << endl;
 }
 
-// TODO: add your new function definitions here
+void choice_kitchen() {
+    cout << "You explore the kitchen." << endl;
+    cout << "You find a pumpkin pie on the counter." << endl;
+    cout << "Do you:" << endl;
+    cout << "1. Eat the pie" << endl;
+    cout << "2. Leave the pie alone" << endl;
+
+    int choice = 0;
+    cout << "Choose: ";
+    cin >> choice;
+
+
+  if (cin.fail()) {
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cout << "Invalid choice. Please choose 1 or 2." << endl;
+      choice_kitchen();
+      return;
+  }
+
+    if (1 == choice) {
+        choice_pie_ending();
+        return;
+    } else if (2 == choice) {
+        cout << "You wisely leave the pie alone and continue exploring." << endl;
+    } else {
+        cout << "Invalid choice. Please choose 1 or 2." << endl;
+        choice_kitchen();
+        return;
+    }
+
+    cout << "Where would you like to go next?" << endl;
+    cout << "1. Explore the bedroom" << endl;
+    cout << "2. Explore the basement" << endl;
+    cout << "3. Go home" << endl;
+
+    choice = 0;
+    cout << "Choose: ";
+    cin >> choice;
+
+    if (cin.fail()) {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Invalid choice. Please enter a number from 1 to 4." << endl;
+    choice_kitchen();
+    return;
+  }
+
+    if (1 == choice) {
+        choice_bedroom();
+    } else if (2 == choice) {
+        choice_basement();
+    } else if (3 == choice) {
+        choice_go_home();
+    } else {
+        cout << "Invalid choice. Please choose 1, 2, or 3." << endl;
+        choice_kitchen();
+    }
+}
+
+void choice_bedroom() {
+  cout << "You explore the bedroom." << endl;
+  cout << "You find a cozy bed and wonder if you should take a quick nap." << endl;
+  cout << "Do you:" << endl;
+  cout << "1. Take a nap" << endl;
+  cout << "2. Leave the bedroom" << endl;
+
+  int choice = 0;
+  cout << "Choose: ";
+  cin >> choice;
+
+  if (cin.fail()) {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Invalid choice. Please choose 1 or 2." << endl;
+    choice_bedroom();
+    return;
+}
+
+  if (1 == choice) {
+    cout << "You take a nap and wake up feeling refreshed!" << endl;
+    cout << "You decide to continue exploring the house." << endl;
+  } else if (2 == choice) {
+    cout << "You leave the bedroom and continue exploring." << endl;
+  } else {
+    cout << "Invalid choice. Please choose 1 or 2." << endl;
+    choice_bedroom();
+    return;
+  }
+
+  cout << "Do you want to explore the basement or go home?" << endl;
+  cout << "1. Explore the basement" << endl;
+  cout << "2. Go home" << endl;
+  cout << "Choose: ";
+  cin >> choice;
+
+  if (cin.fail()) {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Invalid choice. Please choose 1 or 2." << endl;
+    choice_bedroom();
+    return;
+}
+
+  if (1 == choice) {
+    choice_basement();
+  } else if (2 == choice) {
+    choice_go_home();
+  } else {
+    cout << "Invalid choice. Please choose 1 or 2." << endl;
+    choice_bedroom();
+  }
+}
+
+
+void choice_basement() {
+    cout << "You explore the basement." << endl;
+    cout << "You find a dusty chest in the corner." << endl;
+    cout << "Do you:" << endl;
+    cout << "1. Open the chest" << endl;
+    cout << "2. Leave the chest alone and go home" << endl;
+
+    int choice = 0;
+    cout << "Choose: ";
+    cin >> choice;
+
+    if (cin.fail()) {
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Invalid choice. Please choose 1 or 2." << endl;
+    choice_basement();
+    return;
+}
+
+    if (1 == choice) {
+        choice_treasure_ending();
+    } else if (2 == choice) {
+        cout << "You decide the chest isn't worth the risk." << endl;
+        choice_go_home();
+    } else {
+        cout << "Invalid choice. Please choose 1 or 2." << endl;
+        choice_basement();
+    }
+}
+
+void choice_pie_ending() {
+    cout << "You eat the pie and feel sick." << endl;
+    cout << "You should have left it alone. Now you're dead!" << endl;
+    cout << "Game over!" << endl;
+}
+
+void choice_treasure_ending() {
+    cout << "You open the chest and discover ancient gold!" << endl;
+    cout << "Suddenly, a ghost appears from the shadows." << endl;
+    cout << "The ghost curses you for disturbing its treasure." << endl;
+    cout << "You escape the house, but the ghost follows you everywhere." << endl;
+    cout << "You have been haunted forever! Game over!" << endl;
+}
