@@ -142,6 +142,10 @@ void choice_back_door() {
 
 void choice_go_home() {
   cout << "You decide to go home." << endl;
+  cout << "The streets grow quieter as the familiar path unfolds beneath your feet." << endl;
+  cout << "By the time you unlock the front door, the weight of the day finally begins to lift off your shoulders." << endl;
+  cout << "You lock the door behind you, feeling safe at last." << endl;
+}
 }
 
 void choice_kitchen() {
