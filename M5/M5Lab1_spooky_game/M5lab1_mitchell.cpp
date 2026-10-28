@@ -146,7 +146,6 @@ void choice_go_home() {
   cout << "By the time you unlock the front door, the weight of the day finally begins to lift off your shoulders." << endl;
   cout << "You lock the door behind you, feeling safe at last." << endl;
 }
-}
 
 void choice_kitchen() {
     cout << "You explore the kitchen." << endl;
