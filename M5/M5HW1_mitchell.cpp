@@ -48,7 +48,7 @@ int main() {
             question5();
         }
         else if (choice == 6) {
-            cout << "Goodbye!" << endl;
+            cout << "Goodbye! Thank you for stopping by." << endl;
         }
         else {
             cout << "Invalid choice. Please enter a number from 1 to 6." << endl;
