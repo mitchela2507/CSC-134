@@ -91,6 +91,7 @@ int main() {
     // BONUS: objects. Use two more parallel arrays, the same way:
     string itemNames[NUM_ITEMS] = {"blue key", "flashlight" , "cursed doll", "cursed mirror"};
     int itemRoom[NUM_ITEMS]     = {KITCHEN, BASEMENT, GARDEN, LIBRARY};
+    bool itemIsCursed[NUM_ITEMS] = {false, false, true, true}; // blue key, flashlight, cursed doll, cursed mirror
     // itemRoom[i] holds the room number where item i is.
     // You also need an enum Item that ends with NUM_ITEMS.
 
@@ -119,8 +120,8 @@ int main() {
     connections[KITCHEN][WEST]        = ENTRANCE_HALL;
     connections[GARDEN][EAST]         = ENTRANCE_HALL;
     connections[BASEMENT][NORTH]      = KITCHEN;
-    connections[BASEMENT][SOUTH] = LAUNDRY_ROOM;     // EXAMPLE 4 of 4
-    connections[LAUNDRY_ROOM][NORTH] = BASEMENT;     // EXAMPLE 4 of 4
+    connections[BASEMENT][SOUTH]      = LAUNDRY_ROOM;     // EXAMPLE 4 of 4
+    connections[LAUNDRY_ROOM][NORTH]  = BASEMENT;     // EXAMPLE 4 of 4
     // TRY: delete one "way back" line. Predict what the player can do.
 
     // ============================================================
@@ -128,6 +129,8 @@ int main() {
     // ============================================================
     int currentRoom = ENTRANCE_HALL;   // EDIT: start in any room
     bool gameRunning = true;           // KEEP: the loop runs while this is true
+    bool gameWon = false;
+    bool gameLost = false;
 
     // ============================================================
     // PART 5: THE GAME LOOP
@@ -137,7 +140,7 @@ int main() {
     //   Step 3: act on the command.
     //   Step 4: repeat, unless gameRunning is false.
     // ============================================================
-    while (gameRunning) {
+    while (gameRunning && !gameWon && !gameLost) {
 
         // Step 1: show the room.
         cout << "\nYou are in the " << roomNames[currentRoom] << endl;
@@ -167,7 +170,7 @@ int main() {
         // TRY: type "go north". Predict what happens. Why?
         string command;
         cout << "\nWhat would you like to do? ";
-        if (!(cin >> command)) {
+        if (!getline(cin, command)) {
             break;   // KEEP: input ended (Ctrl+D). Stop the loop. Without this line, the game never ends.
         }
 
@@ -199,6 +202,8 @@ int main() {
             } else {
                 cout << "You can't go that way." << endl;
             }
+        } else if (command == "look" || command == "l") {
+        // do nothing: the loop shows the room again at the top of the next turn
         } else if (command == "quit" || command == "q") {
             gameRunning = false;   // Step 4 will end the loop
         } else {
