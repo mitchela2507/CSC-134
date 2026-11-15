@@ -85,7 +85,7 @@ int main() {
         "A spacious kitchen with an old stove and wooden counter.",
         "An overgrown garden with stone pathways and a small fountain.",
         "A dark, damp basement with cobwebs in the corners.",
-        "A cluttered laundry room with a washing machine and dryer.",   // EXAMPLE 3 of 4
+        "A cluttered laundry room with a washing machine, a dryer, and a locked back door.",   // EXAMPLE 3 of 4
     };
 
     // BONUS: objects. Use two more parallel arrays, the same way:
@@ -173,46 +173,84 @@ int main() {
         if (!getline(cin, command)) {
             break;   // KEEP: input ended (Ctrl+D). Stop the loop. Without this line, the game never ends.
         }
+        string verb = command;
+        string target = "";
+        size_t space = command.find(' ');
+        if (space != string::npos) {
+            verb = command.substr(0, space);
+            target = command.substr(space + 1);
+        }
 
         // Step 3: act on the command.
         // TRY: type NORTH in capital letters. Why does it fail?
         // STRETCH: the four direction blocks repeat the same idea.
         // Can you replace them with one loop over DIRECTION_NAMES?
-        if (command == "north" || command == "n") {
+        if (verb == "north" || verb == "n") {
             if (connections[currentRoom][NORTH] != -1) {
                 currentRoom = connections[currentRoom][NORTH];   // move to the new room
             } else {
                 cout << "You can't go that way." << endl;
             }
-        } else if (command == "east" || command == "e") {
+        } else if (verb == "east" || verb == "e") {
             if (connections[currentRoom][EAST] != -1) {
                 currentRoom = connections[currentRoom][EAST];
             } else {
                 cout << "You can't go that way." << endl;
             }
-        } else if (command == "south" || command == "s") {
+        } else if (verb == "south" || verb == "s") {
             if (connections[currentRoom][SOUTH] != -1) {
                 currentRoom = connections[currentRoom][SOUTH];
             } else {
                 cout << "You can't go that way." << endl;
             }
-        } else if (command == "west" || command == "w") {
+        } else if (verb == "west" || verb == "w") {
             if (connections[currentRoom][WEST] != -1) {
                 currentRoom = connections[currentRoom][WEST];
             } else {
                 cout << "You can't go that way." << endl;
             }
-        } else if (command == "look" || command == "l") {
+        } else if (verb == "look" || verb == "l") {
         // do nothing: the loop shows the room again at the top of the next turn
-        } else if (command == "quit" || command == "q") {
+        } else if (verb == "quit" || verb == "q") {
             gameRunning = false;   // Step 4 will end the loop
+        } else if (verb == "take" || verb == "get") {
+            bool found = false;
+            for (int i = 0; i < NUM_ITEMS; i++) {
+                if (itemRoom[i] == currentRoom && itemNames[i] == target) {
+                    found = true;
+                    if (itemIsCursed[i]) {
+                        cout << "The " << itemNames[i] << " is cursed! Darkness closes in..." << endl;
+                        gameLost = true;
+                    } else {
+                        itemRoom[i] = -1;   // -1 means the player is carrying it
+                        cout << "You take the " << itemNames[i] << "." << endl;
+                    }
+                }
+            }
+            if (!found) {
+                cout << "You don't see that here." << endl;
+            }
+        } else if (verb == "open" && target == "door") {
+            if (currentRoom != LAUNDRY_ROOM) {
+                cout << "There's no door to open here." << endl;
+            } else if (itemRoom[BLUE_KEY] == -1) {
+                cout << "The blue key turns in the lock." << endl;
+                gameWon = true;
+            } else {
+                cout << "The back door is locked. You need a key." << endl;
+            }
         } else {
-            // EDIT: write your own message.
             cout << "I don't understand that command." << endl;
         }
     }
+    if (gameLost) {
+        cout << "\nYou lose. The mansion keeps you forever." << endl;
+    }
+    if (gameWon) {
+        cout << "\nThe door swings open. You escape the mansion. You win!" << endl;
+    }
 
     // EDIT: write your own goodbye.
-    cout << "Thanks for playing!" << endl;
+    cout << "Goodbye and thanks for playing!" << endl;
     return 0;
 }
