@@ -1,0 +1,255 @@
+// CSC 134
+// M6HW1 - Gold
+// mitchella
+// 11/16/2026
+
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+
+// ============================================================
+// PART 1: ENUMS (names for numbers)
+// The compiler counts from 0. NORTH is 0, EAST is 1, and so on.
+// The last name is the count: NUM_DIRECTIONS is 4.
+// ============================================================
+
+// KEEP: do not write "= number" after these names. Let the compiler count.
+enum Direction {
+    NORTH,
+    EAST,
+    SOUTH,
+    WEST,
+    NUM_DIRECTIONS      // KEEP: always the last name
+};
+
+// KEEP: the words must be in the same order as the Direction enum.
+const string DIRECTION_NAMES[NUM_DIRECTIONS] = {
+    "north", "east", "south", "west"
+};
+
+// ADD A ROOM, step 1 of 4: add the new name above NUM_ROOMS.
+// EDIT: rename the rooms. The order here must match every list below.
+enum Room {
+    ENTRANCE_HALL,
+    LIBRARY,
+    KITCHEN,
+    GARDEN,
+    BASEMENT,
+    LAUNDRY_ROOM,           // EXAMPLE 1 of 4
+    NUM_ROOMS           // KEEP: always the last name
+};
+
+enum Item {
+    BLUE_KEY,
+    FLASHLIGHT,
+    CURSED_DOLL,
+    CURSED_MIRROR,
+    NUM_ITEMS
+};
+
+
+
+int main() {
+    // ============================================================
+    // PART 2: ROOM DATA (parallel arrays)
+    // Same index means same room.
+    // roomNames[LIBRARY] and roomDescriptions[LIBRARY] both
+    // describe the Library.
+    // ============================================================
+
+    // ADD A ROOM, step 2 of 4: add the new name at the end of this list.
+    string roomNames[NUM_ROOMS] = {
+        "Entrance Hall",     // EDIT: use any names you like
+        "Library",
+        "Kitchen",
+        "Garden",
+        "Basement",
+        "Laundry Room",          // EXAMPLE 2 of 4
+    };
+
+    // ADD A ROOM, step 3 of 4: add the new description at the end.
+    // TRY: make this list one item shorter than NUM_ROOMS. Does the
+    // compiler warn you? What does the game print for that room?
+    string roomDescriptions[NUM_ROOMS] = {
+        "A grand entrance hall with a dusty chandelier hanging above.",
+        "Walls lined with ancient books. The air smells of old paper.",
+        "A spacious kitchen with an old stove and wooden counter.",
+        "An overgrown garden with stone pathways and a small fountain.",
+        "A dark, damp basement with cobwebs in the corners.",
+        "A cluttered laundry room with a rusty washing machine, a dented old dryer, and a locked back door.",   // EXAMPLE 3 of 4
+    };
+
+    // BONUS: objects. Use two more parallel arrays, the same way:
+    string itemNames[NUM_ITEMS] = {"blue key", "flashlight" , "cursed doll", "cursed mirror"};
+    int itemRoom[NUM_ITEMS]     = {KITCHEN, BASEMENT, GARDEN, LIBRARY};
+    bool itemIsCursed[NUM_ITEMS] = {false, false, true, true}; // blue key, flashlight, cursed doll, cursed mirror
+    // itemRoom[i] holds the room number where item i is.
+    // You also need an enum Item that ends with NUM_ITEMS.
+
+    // ============================================================
+    // PART 3: THE MAP (a 2D array)
+    // connections[from_room][direction] holds the room you reach.
+    // The value -1 means "no exit".
+    // ============================================================
+    int connections[NUM_ROOMS][NUM_DIRECTIONS];
+
+    // KEEP: set every cell to -1 first. Then set only the exits that exist.
+    for (int i = 0; i < NUM_ROOMS; i++) {
+        for (int j = 0; j < NUM_DIRECTIONS; j++) {
+            connections[i][j] = -1;
+        }
+    }
+
+    // ADD A ROOM, step 4 of 4: add the exits in BOTH rooms.
+    // EDIT: change, add, or remove exits.
+    // Read this line as: from the Entrance Hall, go north to reach the Library.
+    connections[ENTRANCE_HALL][NORTH] = LIBRARY;
+    connections[ENTRANCE_HALL][EAST]  = KITCHEN;
+    connections[ENTRANCE_HALL][WEST]  = GARDEN;
+    connections[LIBRARY][SOUTH]       = ENTRANCE_HALL;   // the way back
+    connections[KITCHEN][SOUTH]       = BASEMENT;
+    connections[KITCHEN][WEST]        = ENTRANCE_HALL;
+    connections[GARDEN][EAST]         = ENTRANCE_HALL;
+    connections[BASEMENT][NORTH]      = KITCHEN;
+    connections[BASEMENT][SOUTH]      = LAUNDRY_ROOM;     // EXAMPLE 4 of 4
+    connections[LAUNDRY_ROOM][NORTH]  = BASEMENT;     // EXAMPLE 4 of 4
+    // TRY: delete one "way back" line. Predict what the player can do.
+
+    // ============================================================
+    // PART 4: GAME STATE
+    // ============================================================
+    int currentRoom = ENTRANCE_HALL;   // EDIT: start in any room
+    bool gameRunning = true;           // KEEP: the loop runs while this is true
+    bool gameWon = false;
+    bool gameLost = false;
+
+    // ============================================================
+    // PART 5: THE GAME LOOP
+    // One pass of the loop is one turn:
+    //   Step 1: show the room and the exits.
+    //   Step 2: read a command.
+    //   Step 3: act on the command.
+    //   Step 4: repeat, unless gameRunning is false.
+    // ============================================================
+    while (gameRunning && !gameWon && !gameLost) {
+
+        // Step 1: show the room.
+        cout << "\nYou are in the " << roomNames[currentRoom] << endl;
+        cout << roomDescriptions[currentRoom] << endl;
+
+        // Step 1, continued: show the exits.
+        // The loop reads one row of the map. A cell that is not -1 is an exit.
+        for (int i = 0; i < NUM_ITEMS; i++) {
+            if (itemRoom[i] == currentRoom) {
+                cout << "You see a " << itemNames[i] << "." << endl;
+            }
+        }
+        cout << "Exits: ";
+        bool hasExits = false;
+        for (int dir = 0; dir < NUM_DIRECTIONS; dir++) {
+            if (connections[currentRoom][dir] != -1) {
+                cout << DIRECTION_NAMES[dir] << " ";
+                hasExits = true;
+            }
+        }
+        if (!hasExits) {
+            cout << "none";
+        }
+        cout << endl;
+
+        // Step 2: read a command. The cin >> operator reads one word.
+        // TRY: type "go north". Predict what happens. Why?
+        string command;
+        cout << "\nWhat would you like to do? ";
+        if (!getline(cin, command)) {
+            break;   // KEEP: input ended (Ctrl+D). Stop the loop. Without this line, the game never ends.
+        }
+
+        for (int i = 0; i < command.length(); i++) {      // this part lets the user use either lower or upper case letters...
+            if (command[i] >= 'A' && command[i] <= 'Z') {
+                command[i] = command[i] + 32;
+            }
+        }
+
+        string verb = command;
+        string target = "";
+        size_t space = command.find(' ');
+        if (space != string::npos) {
+            verb = command.substr(0, space);
+            target = command.substr(space + 1);
+        }
+
+        // Step 3: act on the command.
+        // TRY: type NORTH in capital letters. Why does it fail?
+        // STRETCH: the four direction blocks repeat the same idea.
+        // Can you replace them with one loop over DIRECTION_NAMES?
+        if (verb == "north" || verb == "n") {
+            if (connections[currentRoom][NORTH] != -1) {
+                currentRoom = connections[currentRoom][NORTH];   // move to the new room
+            } else {
+                cout << "You can't go that way." << endl;
+            }
+        } else if (verb == "east" || verb == "e") {
+            if (connections[currentRoom][EAST] != -1) {
+                currentRoom = connections[currentRoom][EAST];
+            } else {
+                cout << "You can't go that way." << endl;
+            }
+        } else if (verb == "south" || verb == "s") {
+            if (connections[currentRoom][SOUTH] != -1) {
+                currentRoom = connections[currentRoom][SOUTH];
+            } else {
+                cout << "You can't go that way." << endl;
+            }
+        } else if (verb == "west" || verb == "w") {
+            if (connections[currentRoom][WEST] != -1) {
+                currentRoom = connections[currentRoom][WEST];
+            } else {
+                cout << "You can't go that way." << endl;
+            }
+        } else if (verb == "look" || verb == "l") {
+        // do nothing: the loop shows the room again at the top of the next turn
+        } else if (verb == "quit" || verb == "q") {
+            gameRunning = false;   // Step 4 will end the loop
+        } else if (verb == "take" || verb == "get") {
+            bool found = false;
+            for (int i = 0; i < NUM_ITEMS; i++) {
+                if (itemRoom[i] == currentRoom && itemNames[i] == target) {
+                    found = true;
+                    if (itemIsCursed[i]) {
+                        cout << "The " << itemNames[i] << " is cursed! Darkness closes in..." << endl;
+                        gameLost = true;
+                    } else {
+                        itemRoom[i] = -1;   // -1 means the player is carrying it
+                        cout << "You take the " << itemNames[i] << "." << endl;
+                    }
+                }
+            }
+            if (!found) {
+                cout << "You don't see that here." << endl;
+            }
+        } else if (verb == "open" && target == "door") {
+            if (currentRoom != LAUNDRY_ROOM) {
+                cout << "There's no door to open here." << endl;
+            } else if (itemRoom[BLUE_KEY] == -1) {
+                cout << "The blue key turns in the lock." << endl;
+                gameWon = true;
+            } else {
+                cout << "The back door is locked. You need a key." << endl;
+            }
+        } else {
+            cout << "I don't understand that command." << endl;
+        }
+    }
+    if (gameLost) {
+        cout << "\nYou lose. The mansion keeps you forever." << endl;
+    }
+    if (gameWon) {
+        cout << "\nThe door swings open. You escape the mansion. You win!" << endl;
+    }
+
+    // EDIT: write your own goodbye.
+    cout << "Goodbye and thanks for playing!" << endl;
+    return 0;
+}
