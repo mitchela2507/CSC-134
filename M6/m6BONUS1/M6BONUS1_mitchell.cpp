@@ -85,7 +85,7 @@ int main() {
         "A spacious kitchen with an old stove and wooden counter.",
         "An overgrown garden with stone pathways and a small fountain.",
         "A dark, damp basement with cobwebs in the corners.",
-        "A cluttered laundry room with a washing machine, a dryer, and a locked back door.",   // EXAMPLE 3 of 4
+        "A cluttered laundry room with a rusty washing machine, a dented old dryer, and a locked back door.",   // EXAMPLE 3 of 4
     };
 
     // BONUS: objects. Use two more parallel arrays, the same way:
